@@ -1,11 +1,13 @@
-#[derive(Debug, Clone, PartialEq)]
+use serde::{Serialize, Deserialize};
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub(crate) enum Op {
 	In(In),
 	Pre(Pre),
 	Post(Post),
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub(crate) enum In {
 	Pow,
 	Mul,
@@ -15,14 +17,14 @@ pub(crate) enum In {
 	PlusMinus,
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub(crate) enum Pre {
 	Neg,
 	Pos,
 	PosNeg,
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub(crate) enum Post {
 	Fact,
 	Percent,

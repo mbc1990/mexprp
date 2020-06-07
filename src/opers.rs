@@ -10,6 +10,7 @@ use crate::answer::Answer;
 pub type Calculation<N> = Result<Answer<N>, MathError>;
 
 /// A trait for operations
+#[typetag::serde(tag = "type")]
 pub trait Operate<N: Num>: Debug {
 	/// Evalute the operation or return an error
 	fn eval(&self, ctx: &Context<N>) -> Calculation<N>;
@@ -23,6 +24,7 @@ pub(crate) struct Add<N: Num> {
 	pub b: Term<N>,
 }
 
+#[typetag::serde]
 impl<N: Num + 'static> Operate<N> for Add<N> {
 	fn eval(&self, ctx: &Context<N>) -> Calculation<N> {
 		let a = self.a.eval_ctx(ctx)?;
@@ -44,6 +46,7 @@ pub(crate) struct Sub<N: Num> {
 	pub b: Term<N>,
 }
 
+#[typetag::serde]
 impl<N: Num + 'static> Operate<N> for Sub<N> {
 	fn eval(&self, ctx: &Context<N>) -> Calculation<N> {
 		let a = self.a.eval_ctx(ctx)?;
@@ -65,6 +68,7 @@ pub(crate) struct Mul<N: Num> {
 	pub b: Term<N>,
 }
 
+#[typetag::serde]
 impl<N: Num + 'static> Operate<N> for Mul<N> {
 	fn eval(&self, ctx: &Context<N>) -> Calculation<N> {
 		let a = self.a.eval_ctx(ctx)?;
@@ -86,6 +90,7 @@ pub(crate) struct Div<N: Num> {
 	pub b: Term<N>,
 }
 
+#[typetag::serde]
 impl<N: Num + 'static> Operate<N> for Div<N> {
 	fn eval(&self, ctx: &Context<N>) -> Calculation<N> {
 		let a = self.a.eval_ctx(ctx)?;
@@ -107,6 +112,7 @@ pub(crate) struct Pow<N: Num> {
 	pub b: Term<N>,
 }
 
+#[typetag::serde]
 impl<N: Num + 'static> Operate<N> for Pow<N> {
 	fn eval(&self, ctx: &Context<N>) -> Calculation<N> {
 		let a = self.a.eval_ctx(ctx)?;
@@ -128,6 +134,7 @@ pub(crate) struct PlusMinus<N: Num> {
 	pub b: Term<N>,
 }
 
+#[typetag::serde]
 impl<N: Num + 'static> Operate<N> for PlusMinus<N> {
 	fn eval(&self, ctx: &Context<N>) -> Calculation<N> {
 		let a = self.a.eval_ctx(ctx)?;
@@ -153,6 +160,7 @@ pub(crate) struct Neg<N: Num> {
 	pub a: Term<N>,
 }
 
+#[typetag::serde]
 impl<N: Num + 'static> Operate<N> for Neg<N> {
 	fn eval(&self, ctx: &Context<N>) -> Calculation<N> {
 		let a = self.a.eval_ctx(ctx)?;
@@ -172,6 +180,7 @@ pub(crate) struct Pos<N: Num> {
 	pub a: Term<N>,
 }
 
+#[typetag::serde]
 impl<N: Num + 'static> Operate<N> for Pos<N> {
 	fn eval(&self, ctx: &Context<N>) -> Calculation<N> {
 		let a = self.a.eval_ctx(ctx)?;
@@ -189,6 +198,7 @@ pub(crate) struct PosNeg<N: Num> {
 	pub a: Term<N>,
 }
 
+#[typetag::serde]
 impl<N: Num + 'static> Operate<N> for PosNeg<N> {
 	fn eval(&self, ctx: &Context<N>) -> Calculation<N> {
 		let a = self.a.eval_ctx(ctx)?;
@@ -211,6 +221,7 @@ pub(crate) struct Fact<N: Num> {
 	pub a: Term<N>,
 }
 
+#[typetag::serde]
 impl<N: Num + 'static> Operate<N> for Fact<N> {
 	fn eval(&self, _ctx: &Context<N>) -> Calculation<N> {
 		Err(MathError::Unimplemented {
@@ -229,6 +240,7 @@ pub(crate) struct Percent<N: Num> {
 	pub a: Term<N>,
 }
 
+#[typetag::serde]
 impl<N: Num + 'static> Operate<N> for Percent<N> {
 	fn eval(&self, ctx: &Context<N>) -> Calculation<N> {
 		let a = self.a.eval_ctx(ctx)?;

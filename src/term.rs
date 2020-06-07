@@ -10,10 +10,12 @@ use crate::num::*;
 use crate::answer::*;
 use crate::expr::*;
 
+use serde::{Serialize, Deserialize};
+
 /// The main representation of parsed equations. It is an operand that can contain an operation between
 /// more of itself. This form is the only one that can be directly evaluated. Does not include it's own
 /// context.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Term<N: Num> {
 	/// A number
 	Num(Answer<N>),

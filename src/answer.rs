@@ -1,6 +1,7 @@
 use crate::num::Num;
 use crate::opers::Calculation;
 use std::fmt;
+use serde::{Serialize, Deserialize};
 
 /// An answer of an evaluatation. Can be either a single answer or multiple. This struct contains some
 /// helper methods for performing operations on single or multiple answers. The `op` method takes another
@@ -8,7 +9,7 @@ use std::fmt;
 /// that function on all combinations and returns an answer with all of the results in one. The `unop`
 /// function is similar but it performs an operation on only itself, without another value (*un*ary
 /// *op*eration).
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Answer<N: Num> {
 	/// A single answer
 	Single(N),
